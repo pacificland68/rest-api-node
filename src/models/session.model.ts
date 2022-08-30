@@ -1,22 +1,24 @@
 import mongoose from "mongoose";
 import bcrypt from 'bcrypt'
 import config from 'config'
+import { UserDocument } from "./user.model";
 
-export interface SchemaDocument extends mongoose.Document{
+export interface SessionDocument extends mongoose.Document{
   user: UserDocument['_id'], 
   valid: boolean, 
+  userAgent: string,
   createdAt: Date,
-  updatedAt: Date,
-  comparePassword(candidatePassword: string): Promise<Boolean>
+  updatedAt: Date
 }
 
-const userSchema = new mongoose.Schema({
+const sessionSchema = new mongoose.Schema({
   email: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
-  valid: {type: Boolean , default: true}
+  valid: {type: Boolean , default: true},
+  userAgent: {type: String}
 },{
   timestamps: true 
 })
 
-const SessionModel = mongoose.model<UserDocument>("User", userSchema)
+const SessionModel = mongoose.model<SessionDocument>("Session", sessionSchema)
 
 export default SessionModel;
