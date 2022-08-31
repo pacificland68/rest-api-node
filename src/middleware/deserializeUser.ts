@@ -6,6 +6,8 @@ import { reIssueAccessToken } from '../service/session.service'
 const deserializaUser = async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = get(req, "headers.authorization", "").replace(/^Bearer\s/,"")
 
+    console.log("accessToken", accessToken);
+
     const refreshToken = get(req, "headers.x-refresh")
 
     if(!accessToken){
@@ -13,6 +15,7 @@ const deserializaUser = async (req: Request, res: Response, next: NextFunction) 
     }
 
     const {decoded, expired} = verifyJwt(accessToken)
+    console.log("decoded2", decoded);
 
     if(decoded){
         res.locals.user = decoded
