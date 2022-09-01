@@ -13,8 +13,9 @@ import { createProductHandler, getProductHandler, updateProductHandler } from '.
 function routes(app: Express){
   app.get('/healthcheck', (req: Request, res: Response) => res.sendStatus(200))
 
-
   app.post('/api/users', valiate(createUserSchema), createUserHandler)
+
+  // app.get('/api/users', )
 
   app.post("/api/session", valiate(createSessionSchema), createUserSessionHandler)
 

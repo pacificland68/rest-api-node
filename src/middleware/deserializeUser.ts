@@ -6,11 +6,12 @@ import { reIssueAccessToken } from '../service/session.service'
 const deserializaUser = async (req: Request, res: Response, next: NextFunction) => {
     const accessToken = get(req, "headers.authorization", "").replace(/^Bearer\s/,"")
 
-    console.log("accessToken", accessToken);
+    console.log("accessToken1212", accessToken);
 
     const refreshToken = get(req, "headers.x-refresh")
 
     if(!accessToken){
+        // 如果没有传accesstoken的值，则下一个中间件
         return next()
     }
 
