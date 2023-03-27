@@ -29,7 +29,7 @@ const deserializaUser = async (req: Request, res: Response, next: NextFunction) 
             res.setHeader('x-access-token', newAccessToken)
         }
 
-        const result = verifyJwt(newAccessToken)
+        const result = verifyJwt(newAccessToken+'')
 
         res.locals.user = result.decoded
         return next()
